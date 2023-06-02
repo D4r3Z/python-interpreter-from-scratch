@@ -1,0 +1,35 @@
+from enum import Enum
+class tt_tokens(Enum):
+    TT_INT=1
+    TT_STRING=2
+    TT_FLOAT=3
+    TT_PLUS=4
+    TT_MINUS=5
+    TT_MUL=6
+    TT_ID=7
+    TT_KEYWORD=8
+    TT_DIV=9
+    TT_EQ=10
+    TT_LPAREN=11
+    TT_RPAREN=12
+    TT_END=13
+    TT_BOOL_NOT=14
+    TT_BOOL_EQ =15
+    TT_BOOL_NE=16
+    TT_BOOL_GT=17
+    TT_BOOL_LT =18
+    TT_BOOL_GTE=19
+    TT_BOOL_LTE=20
+    TT_KEY_AND=21
+    TT_KEY_OR=22
+    TT_KEY_IF=23
+    TT_KEY_WHILE=24
+    TT_NEWLINE=25
+    TT_EOF=26
+    TT_LBRACKET=27
+    TT_RBRACKET=28
+    TT_MOD=29
+    TT_LSQUARE=30
+    TT_RSQUARE=31 
+    TT_COMMA=32
+    TT_BREAK=33
