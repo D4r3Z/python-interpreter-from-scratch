@@ -3,6 +3,6 @@ It is a half-baked interpreter that I made from scratch on python. Perhaps this 
 ## **How to run it?**
 Just go to *shell.py*, change file dir on *12th line* and run it!
 ## **What can this interpreter do?**
-Init variables, calculation, *WHILE* cycle, *IF/ELSE* branching, call *build-in functions*, multiline comments.
+Init variables, calculation, *WHILE* cycle, *IF/ELSE* branching, call *build-in functions*, single-line and multi-line *comments*.
 ## **What's syntax of this?**
-You can check towers.txt file to see syntax of language.
+You can check *towers.txt* file to see sample syntax of language.
