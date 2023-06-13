@@ -97,7 +97,7 @@ class Parser:
         if self.curtok.type==tt_tokens.TT_RPAREN:
             self.next()
         else:
-            expr=self.atom()
+            expr=self.comp_expr()
             arg_nodes.append(expr)
             while self.curtok.type == tt_tokens.TT_COMMA:
                 self.next()

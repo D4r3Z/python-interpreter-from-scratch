@@ -1,7 +1,5 @@
 from py_interpreter import Interpreter
 from var_types import String,Int,Float,List
-from symbol_table import SymbolTable
-from copy import deepcopy
 class BaseFunction:
     def __init__(self,name) -> None:
         self.name=name

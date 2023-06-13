@@ -1,15 +1,21 @@
-from py_lexer import *
-from py_parser import *
-from py_interpreter import *
+from py_lexer import Lexer
+from py_parser import Parser
+from py_interpreter import Interpreter
 from time import time
 from global_st import globals
-Spawner=Interpreter(globals)
+
+Spawner=Interpreter(globals) #set global symbol table
+file_dir='input.txt' #set input file name
+
+
 def run(file):
-    tokens=Lexer(file.read).make_tokens()
-    ast=Parser(tokens).parse()
-    result=Spawner.interpretate(ast)
+    tokens=Lexer(file.read).make_tokens()#getting tokens from lexer
+    ast=Parser(tokens).parse()#getting syntax tree from parser
+    result=Spawner.interpretate(ast)#interpritating tree!
     return result
-with open('input.txt','r') as f:
+
+
+with open(file_dir,'r') as f:
     start = time()
     run(f) 
     end=time()

@@ -1,3 +1,4 @@
+'''symbol table for storing variables while programm is working'''
 class SymbolTable:
     def __init__(self) -> None:
         self.symbols={}

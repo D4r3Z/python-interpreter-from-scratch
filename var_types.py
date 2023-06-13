@@ -1,6 +1,6 @@
 from copy import deepcopy
 from ctypes import py_object
-class Var_Type:
+class base_type:#base type of variable with 
     def __init__(self,value) -> None:
         self.value=value
     def __del__(self):
@@ -11,40 +11,41 @@ class Var_Type:
         if isinstance(other,self.__class__):
             self.value=deepcopy(other.value)
             return self.__class__(self.value)
-        raise Exception('ERROR ERROR')
+        raise Exception('ERROR ERROR')# mb i will end this project and add error messages and editor but for now that's all 
     def ored_by(self,right):
-        return Bool(int(self.value!=None or right.value!=None))
+        return Bool(int(self.value!=None or right.value!=None))# a OR b logic
     def anded_by(self,right):
-        return Bool(int(self.value!=None and right.value!=None))
-    def get_comparison_eq(self, other):
-        if isinstance(other, self.__class__):
+        return Bool(int(self.value!=None and right.value!=None))# a AND b logic
+    
+    def get_comparison_eq(self, other):# a==b logic
+        if isinstance(other, self.__class__):##we can compare only vars with same type!
             return Bool(int(self.value == other.value))
         raise Exception('ERROR ERROR')
-    def get_comparison_ne(self, other):
+    def get_comparison_ne(self, other):# a==b logic
         if isinstance(other, self.__class__):
             return Bool(int(self.value != other.value))
         raise Exception('ERROR ERROR')
-    def get_comparison_lt(self, other):
+    def get_comparison_lt(self, other):# a<b logic
         if isinstance(other, self.__class__):
             return Bool(int(self.value < other.value))
         raise Exception('ERROR ERROR')
-    def get_comparison_gt(self, other):
+    def get_comparison_gt(self, other):# a>b logic
         if isinstance(other, self.__class__):
             return Bool(int(self.value > other.value))
         raise Exception('ERROR ERROR')
-    def get_comparison_lte(self, other):
+    def get_comparison_lte(self, other):# a<=b logic
         if isinstance(other, self.__class__):
             return Bool(int(self.value <= other.value))
         raise Exception('ERROR ERROR')
-    def get_comparison_gte(self, other):
+    def get_comparison_gte(self, other):# a>=b logic
         if isinstance(other, self.__class__):
             return Bool(int(self.value >= other.value))
         raise Exception('ERROR ERROR')
-    def added_to(self,other):
+    def added_to(self,other):#a+b logic 
         if isinstance(other,self.__class__):
             return self.__class__(self.value+other.value)
         raise Exception('ERROR ERROR')
-class Bool(Var_Type):
+class Bool(base_type):
     def added_to(self,other):
         if isinstance(other,Bool):
             return Bool(self.value or other.value)
@@ -56,41 +57,47 @@ class Bool(Var_Type):
     def __repr__(self):
         return 'TRUE' if self.value else 'FALSE'
 
-class Number(Var_Type):
-    def substracted_by(self,other):
+class Number(base_type):
+    def substracted_by(self,other):#a-b logic
         if isinstance(other, Number):
             return self.__class__(self.value-other.value)
-    def multiplied_by(self,other):
+    def multiplied_by(self,other):#a*b logic
         if isinstance(other, Number):
             return self.__class__(self.value*other.value)
-    def divided_by(self,other):
+    def divided_by(self,other):#a/b logic
         if isinstance(other, Number):
             return self.__class__(self.value/other.value)
-    def moded_by(self,other):
+    def moded_by(self,other):#a%b logic
         if isinstance(other, Number):
             return self.__class__(self.value%other.value)
-    def get_comparison_eq(self, other):
-        if isinstance(other, Number):
+    def get_comparison_eq(self, other):# a==b logic
+        if isinstance(other,Number):##we can compare only vars with same type!
             return Bool(int(self.value == other.value))
-    def get_comparison_ne(self, other):
-        if isinstance(other, Number):
+        raise Exception('ERROR ERROR')
+    def get_comparison_ne(self, other):# a==b logic
+        if isinstance(other,Number):
             return Bool(int(self.value != other.value))
-    def get_comparison_lt(self, other):
-        if isinstance(other, Number):
+        raise Exception('ERROR ERROR')
+    def get_comparison_lt(self, other):# a<b logic
+        if isinstance(other,Number):
             return Bool(int(self.value < other.value))
-    def get_comparison_gt(self, other):
-        if isinstance(other, Number):
+        raise Exception('ERROR ERROR')
+    def get_comparison_gt(self, other):# a>b logic
+        if isinstance(other,Number):
             return Bool(int(self.value > other.value))
-    def get_comparison_lte(self, other):
-        if isinstance(other, Number):
+        raise Exception('ERROR ERROR')
+    def get_comparison_lte(self, other):# a<=b logic
+        if isinstance(other,Number):
             return Bool(int(self.value <= other.value))
-    def get_comparison_gte(self, other):
-        if isinstance(other, Number):
+        raise Exception('ERROR ERROR')
+    def get_comparison_gte(self, other):# a>=b logic
+        if isinstance(other,Number):
             return Bool(int(self.value >= other.value))
+        raise Exception('ERROR ERROR')
     def added_to(self,other):
         if isinstance(other,Number):
             return self.__class__(self.value+other.value)
-    def is_true(self):
+    def is_true(self):#if a logic
         return True if self.value!=0 else False
     def __repr__(self):
         return str(self.value)
@@ -100,7 +107,7 @@ class Int(Number):
 class Float(Number):
     def __init__(self, value) -> None:
         super().__init__(value)
-class String(Var_Type):
+class String(base_type):
     def multiplied_by(self,other):
         if isinstance(other,Int):
             return String(self.value*other.value)
@@ -108,6 +115,7 @@ class String(Var_Type):
             raise Exception('Invalid operation')
     def __repr__(self):
         return f'"{self.value}"'
+''' Maybe i'll make normal variable types in the future...
 class Array():
     def __init__(self,elements,nodes_type):
         self.lenght=0
@@ -149,7 +157,7 @@ class Array():
         self.A = B
         self.capacity = new_cap
     def make_array(self,new_cap):
-        return (new_cap * py_object)()
+        return (new_cap * py_object)()'''
 class List():
     def __init__(self,elements):
         self.elements=elements

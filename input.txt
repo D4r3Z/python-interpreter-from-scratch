@@ -1,9 +1,4 @@
-var a =input_int();
-while a<100{
-    a=a+1;
-    if a>50{
-        print("break");
-        break;
-    };
-    print(a);
-}
+var a=2;
+var b=2.5;
+var a=a+b;
+print (a>b);

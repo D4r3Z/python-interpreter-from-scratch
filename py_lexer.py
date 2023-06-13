@@ -4,20 +4,19 @@ from token_class import Token
 from constants import DIGITS,LETTER_DIGITS, LETTERS,KEYWORDS
 class Lexer:
     def __init__(self,file_read_fun) -> None:
-        self.file_read_fun=file_read_fun
-        self.pos=-1
-        self.peek=None
-        self.tokens=deque()
-        self.next()
+        self.file_read_fun=file_read_fun#get file function just for easy reading from file
+        self.peek=None#preparing peek char
+        self.tokens=deque()#preparing arr for tokens
+        self.next()#get first file char
     def __del__(self):
         del self.tokens
-        del self.pos
         del self.peek
         self.file_read_fun=None
     def next(self) -> None:
         self.peek=self.file_read_fun(1)
     def make_tokens(self) -> deque:
-        while self.peek!='':
+        while self.peek!='':#when we get eof peek will look like ''
+            #### So, we just get char and compare it with all possible options, then we call functions that will make token for this character(s)
             if self.peek in DIGITS:
                 self.tokens.append(self.make_number())
             elif self.peek == '#':
@@ -72,6 +71,7 @@ class Lexer:
                 self.next()
         self.tokens.append(Token(tt_tokens.TT_EOF))
         return self.tokens
+    #fun for creating identifier or keyword
     def make_id(self) -> Token:
         id_str=''
         while self.peek!='' and self.peek in LETTER_DIGITS+'_':
@@ -82,6 +82,9 @@ class Lexer:
     def skip_comment(self):
         self.next()
         if(self.peek=='#'):
+            '''  # - oneline comm
+                ## - multiline comm
+            '''
             while True:
                 self.next()
                 if(self.peek=='#'):
@@ -96,6 +99,9 @@ class Lexer:
     def make_number(self) -> Token:
         num_str=''
         dot_count=0
+        '''
+        all things that are related to variables are stupid as heck
+        '''
         while self.peek != None and self.peek in DIGITS+'.':
             if self.peek=='.':
                 if dot_count==1:
