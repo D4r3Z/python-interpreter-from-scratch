@@ -1,22 +1,19 @@
-from py_lexer import Lexer
-from py_parser import Parser
-from py_interpreter import Interpreter
+from pprint import pprint
+from io import StringIO
 from time import time
-from global_st import globals
 
-Spawner=Interpreter(globals) #set global symbol table
-file_dir='input.txt' #set input file name
+from custom_interpreter import Interpreter
+from custom_lexer import Lexer
+from custom_parser.parser import Parser
+from global_symbol_table import _globals
 
-
-def run(file):
-    tokens=Lexer(file.read).make_tokens()#getting tokens from lexer
-    ast=Parser(tokens).parse()#getting syntax tree from parser
-    result=Spawner.interpretate(ast)#interpritating tree!
-    return result
+Spawner = Interpreter(Lexer, Parser, _globals)  # set global symbol table
+file_dir = "towers.txt"  # set input file name
 
 
-with open(file_dir,'r') as f:
+with open(file_dir) as file:  # noqa: PTH123
     start = time()
-    run(f) 
-    end=time()
-    print(f'Script completed in {end-start} seconds ')
+    Spawner.run(StringIO("var a = 2; print(a)"))
+    Spawner.run(file)
+    end = time()
+    pprint(f"Script completed in {end-start} seconds ")  # noqa: T203
